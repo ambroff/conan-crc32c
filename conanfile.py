@@ -21,10 +21,14 @@ class Crc32cConan(ConanFile):
 
     def build(self):
         cmake = CMake(self)
-        cmake.configure(source_folder="crc32c")
+        cmake.configure(
+            source_folder='crc32c-{}'.format(self.version),
+            defs={'CRC32C_BUILD_TESTS': False, 'CRC32_BUILD_BENCHMARKS': False})
         cmake.build()
 
     def package(self):
+        cmake = CMake(self)
+        cmake.install()
         self.copy("*.h", dst="include", src="hello")
         self.copy("*crc32c.lib", dst="lib", keep_path=False)
         self.copy("*.dll", dst="bin", keep_path=False)
