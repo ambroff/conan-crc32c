@@ -4,7 +4,7 @@ from conans import ConanFile, CMake, tools
 class Crc32cConan(ConanFile):
     name = "crc32c"
     version = "1.0.5"
-    license = "<Put the package license here>"
+    license = "BSD-3-Clause"
     author = "<Put your name here> <And your email here>"
     url = "<Package recipe repository url here, for issues about the package>"
     description = "<Description of Crc32c here>"
