@@ -5,12 +5,12 @@ class Crc32cConan(ConanFile):
     name = "crc32c"
     version = "1.0.5"
     license = "BSD-3-Clause"
-    author = "<Put your name here> <And your email here>"
+    author = "Kyle Ambroff-Kao <kyle@ambroffkao.com>"
     url = "<Package recipe repository url here, for issues about the package>"
     description = "<Description of Crc32c here>"
-    topics = ("<Put some tag here>", "<here>", "<and here>")
+    topics = ('conan', 'crc32c')
     settings = "os", "compiler", "build_type", "arch"
-    options = {"shared": [True, False]}
+    options = {"shared": [True, False], 'fPIC': [True, False]}
     default_options = "shared=False"
     generators = "cmake"
 
@@ -19,6 +19,10 @@ class Crc32cConan(ConanFile):
             self.version)
         checksum = 'a4de99214639bb1530f73bfdba1873b5e7243bb4b5799fc0db1c7fbab5db7c52'
         tools.get(archive_url, sha256=checksum)
+
+    def config_options(self):
+        if self.settings.os == 'Windows':
+            del self.options.fPIC
 
     def build(self):
         cmake = CMake(self)
