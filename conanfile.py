@@ -15,7 +15,8 @@ class Crc32cConan(ConanFile):
     generators = "cmake"
 
     def source(self):
-        archive_url = 'https://github.com/google/crc32c/archive/{}.zip'.format(self.version)
+        archive_url = 'https://github.com/google/crc32c/archive/{}.zip'.format(
+            self.version)
         checksum = 'a4de99214639bb1530f73bfdba1873b5e7243bb4b5799fc0db1c7fbab5db7c52'
         tools.get(archive_url, sha256=checksum)
 
@@ -23,7 +24,10 @@ class Crc32cConan(ConanFile):
         cmake = CMake(self)
         cmake.configure(
             source_folder='crc32c-{}'.format(self.version),
-            defs={'CRC32C_BUILD_TESTS': False, 'CRC32_BUILD_BENCHMARKS': False})
+            defs={
+                'CRC32C_BUILD_TESTS': False,
+                'CRC32C_BUILD_BENCHMARKS': False,
+                'CRC32C_USE_GLOG': False})
         cmake.build()
 
     def package(self):

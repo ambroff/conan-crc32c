@@ -16,4 +16,4 @@ class Crc32cTestConan(ConanFile):
 
     def test(self):
         os.chdir("bin")
-        self.run(".%program" % os.sep)
+        self.run(".%sprogram" % os.sep)
